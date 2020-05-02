@@ -28,14 +28,23 @@ class Search extends Component {
   // When the component mounts, get a list of all users
   componentDidMount() {
     API.getRandomUsers()
+          .then(function (res) {
+            console.log(res.data.results)
+            return res;
+          } )
       .then(res => this.setState(
         { 
           users: res.data.results,
           filteredUsers: res.data.results
         }))
-      .then(res=>console.log(res.data.results) )
       .catch(err => console.log(err));
   }
+
+  // componentDidMount() {
+  //   API.getRandomUsers()
+  //     .then(res=>console.log(res) )
+  //     .catch(err => console.log(err));
+  // }
 
   handleSearchChange = event => {
     const searchValue = event.target.value;
